@@ -4,11 +4,14 @@
 
 <a class="btn btn-primary" style="float: right" href="/add/">Add a Customer</a></p>
 
-<h1>Customers</h1>
+<h1>We Appreciate Your Support</h1>
 
-<ul style="column-count: 4">
+<ul style="column-count: 2">
   {% for customer in customers %}
-  <li><a href="/{{ customer.id }}/">{{ customer.fullName }}</a></li>
+  <li><a href="/{{ customer.id }}/">{{ customer.fullName }}</a> </li>
+  <li class="list-unstyled">
+    {{ customer.count }} reservations
+  </li>
   {% endfor %}
 </ul>
 

@@ -18,6 +18,17 @@ router.get("/", async function(req, res, next) {
   }
 });
 
+/** Best customers */
+
+router.get("/best", async function(req, res, next) {
+  try {
+    const customers = await Customer.getBest();
+    return res.render("best_customer_list.html", { customers });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 /** Form to add a new customer. */
 
 router.get("/add/", async function(req, res, next) {
@@ -88,6 +99,17 @@ router.post("/:id/edit/", async function(req, res, next) {
     return next(err);
   }
 });
+
+/** Handle customer search */
+router.post("/search/", async function(req, res, next) {
+  try {
+    const name = (req.body.name).toLowerCase();
+    const customers = await Customer.searchName(name);
+    return res.render("customer_list.html", { customers });
+  } catch(e) {
+    return next(e);
+  }
+})
 
 /** Handle adding a new reservation. */
 
